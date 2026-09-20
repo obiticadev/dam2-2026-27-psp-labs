@@ -1,30 +1,75 @@
-# IDE
+# IDE: estado local
 .idea/
-.vscode/
-.settings/
-.project
-.classpath
-.factorypath
 *.iml
 *.iws
+**/.metadata/
 
-# Java, Maven y Gradle
+# VS Code: solo configuracion compartible conocida
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Java, Maven y Gradle: salidas y caches regenerables
 **/target/
 **/build/
+**/bin/
 **/.gradle/
+**/.m2/
 **/out/
+**/.apt_generated/
+**/.apt_generated_tests/
 *.class
+dependency-reduced-pom.xml
+.flattened-pom.xml
+pom.xml.tag
+pom.xml.releaseBackup
+release.properties
+
+# JVM y procesos
 hs_err_pid*
 replay_pid*
+*.hprof
+*.jfr
+*.pid
 
 # Secretos y temporales
 .env
 .env.*
 !.env.example
+!.env.sample
+!.env.template
+!.env.*.example
 credentials.*
 secrets.*
+!credentials.example
+!credentials.example.*
+!credentials.*.example
+!secrets.example
+!secrets.example.*
+!secrets.*.example
+local.properties
+application-local.properties
+application-local.yml
+application-local.yaml
+application-secrets.properties
+application-secrets.yml
+application-secrets.yaml
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*-private.pem
 *.log
 *.tmp
 *.bak
+*~
+*.orig
+*.rej
 .DS_Store
 Thumbs.db
+
+# Dependencias, wrappers y entregas JAR deliberadas si se conservan.
+!**/*.jar
