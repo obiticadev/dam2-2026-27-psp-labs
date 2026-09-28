@@ -5,7 +5,7 @@ public class App {
 
         // ReentrantLock rl = new ReentrantLock();
         System.out.println("Hola mundo");
-        for (int i = 0; i < 2; i++) {
+        while (true) {
             ClaseA claseA = new ClaseA();
             Thread t = new Thread(claseA);
             t.start();
