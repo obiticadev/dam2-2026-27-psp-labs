@@ -1,45 +1,61 @@
 package Clases;
 
+import java.time.Duration;
 import java.util.Random;
-import Enum.Sabor;
 
 public class Heladero implements Runnable {
-    private static int instancias = 0;
-    private int heladero;
-    private int numHelados;
+    private int numHelados; // TOTAL DE HELADOS QUE HARÁ
     private int conteoHelados = 0;
+    private Helado helado;
+    private Random random = new Random();
 
     public Heladero() {
-        this.heladero = ++instancias;
-        Random random = new Random();
-        numHelados = random.nextInt(50) + 1;
+        this.numHelados = random.nextInt(50) + 1;
     }
 
-    public int getNumHelados() {
-        return numHelados;
-    }
-
-    public void crearHelado() {
+    private boolean crearHelado() {
         if (conteoHelados < numHelados) {
-            Random random = new Random();
-            int saborPosition = random.nextInt(Sabor.values().length);
-            Helado helado = new Helado(Sabor.values()[saborPosition]);
-            Nevera.agregarHelado(helado);
             conteoHelados++;
-        } else {
-
+            this.helado = new Helado();
+            return true;
         }
+        return false;
     }
 
-    public String marcharse() {
-        return String.format("El heladero %d ha finalizado con %d helados", this.heladero, this.numHelados);
+    private boolean intentarMeterHelado(Helado helado) {
+        boolean continuar = false;
+        while (!continuar) {
+            if (!Nevera.agregarHelado(helado)) {
+                try {
+                    Thread.sleep(Duration.ofSeconds(5));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                continuar = true;
+            }
+        }
+        return continuar;
+    }
+
+    private String marcharse() {
+        return String.format("El heladero ha finalizado con %d helados", this.numHelados);
+    }
+
+    private void bucleHelados() {
+        while (crearHelado()) {
+            intentarMeterHelado(helado);
+        }
+        System.out.println(marcharse());
     }
 
     @Override
     public void run() {
-        Nevera.lock.lock();
-        crearHelado();
-        Nevera.lock.unlock();
+        bucleHelados();
+    }
+
+    public int getNumHelados() {
+        return numHelados;
     }
 
 }

@@ -1,24 +1,20 @@
-import java.util.ArrayList;
-
 import Clases.Heladero;
-import Clases.Nevera;
 import Clases.Niño;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Nevera nevera = new Nevera();
         final int NUM_HELADEROS = 5;
         final int NUM_NIÑOS = 10;
-        ArrayList<Heladero> listaHeladeros = new ArrayList<>(NUM_HELADEROS);
-        ArrayList<Niño> listaNiños = new ArrayList<>(NUM_NIÑOS);
 
-        for (Heladero heladero : listaHeladeros) {
-            heladero = new Heladero();
-            listaHeladeros.add(heladero);
+        for (int i = 0; i < NUM_HELADEROS; i++) {
+            Heladero heladero = new Heladero();
+            Thread hilo = new Thread(heladero);
+            hilo.start();
         }
-        for (Niño niño : listaNiños) {
-            niño = new Niño();
-            listaNiños.add(niño);
+        for (int i = 0; i < NUM_NIÑOS; i++) {
+            Niño niño = new Niño();
+            Thread hilo = new Thread(niño);
+            hilo.start();
         }
     }
 }

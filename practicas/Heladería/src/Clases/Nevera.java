@@ -9,9 +9,25 @@ public class Nevera {
 
     public static ArrayList<Helado> listaHelados = new ArrayList<>();
 
-    public static void agregarHelado(Helado helado) {
+    public static boolean agregarHelado(Helado helado) {
+        boolean esMetido = false;
+        lock.lock();
         if (listaHelados.size() < MAX_CAPACIDAD) {
             listaHelados.add(helado);
+            esMetido = true;
         }
+        lock.unlock();
+        return esMetido;
+
+    }
+
+    public static Helado sacarHelado() {
+        Helado helado = null;
+        lock.lock();
+        if (listaHelados.size() > 0) {
+            helado = listaHelados.removeFirst();
+        }
+        lock.unlock();
+        return helado;
     }
 }
