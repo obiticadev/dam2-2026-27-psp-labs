@@ -44,7 +44,7 @@ public class Heladero implements Runnable {
     private String marcharse() {
         lockHeladeros.lock();
         try {
-            this.numHeladeros--;
+            Heladero.numHeladeros--;
         } finally {
             lockHeladeros.unlock();
         }
