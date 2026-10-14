@@ -11,19 +11,24 @@ public class Huevera {
     private static ReentrantLock lock = new ReentrantLock();
     private static Condition hayHueco = lock.newCondition();
     private static Condition hayHuevo = lock.newCondition();
+    private static boolean cerrada = false;
 
     public Huevera() {
 
     }
 
-    public static void agregarHuevo(Huevo huevo) throws InterruptedException {
+    public static boolean agregarHuevo(Huevo huevo) throws InterruptedException {
         lock.lock();
         try {
-            while (pila.size() == MAX_CAPACIDAD) {
+            while (pila.size() == MAX_CAPACIDAD && !cerrada) {
                 hayHueco.await();
+            }
+            if (cerrada) {
+                return false;
             }
             pila.push(huevo);
             hayHuevo.signal();
+            return true;
         } finally {
             lock.unlock();
         }
@@ -42,6 +47,17 @@ public class Huevera {
             lock.unlock();
         }
         return huevo;
+    }
+
+    public static void cerrar() {
+        lock.lock();
+        try {
+            cerrada = true;
+            hayHueco.signalAll();
+            hayHuevo.signalAll();
+        } finally {
+            lock.unlock();
+        }
     }
 
     private static int getSizePila() {

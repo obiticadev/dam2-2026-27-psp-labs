@@ -2,6 +2,7 @@ package Clases.Animales;
 
 import java.time.Duration;
 
+import Clases.Granjero;
 import Clases.Huevera;
 import Clases.Huevo;
 import Interfaces.Ponedor;
@@ -10,8 +11,10 @@ public class Pularda implements Ponedor, Runnable {
     private final int PESO_MIN = 80;
     private final int PESO_MAX = 120;
     private final Duration ESPERA_ENTRE_HUEVOS = Duration.ofSeconds(2);
+    private final Granjero granjero;
 
-    public Pularda() {
+    public Pularda(Granjero granjero) {
+        this.granjero = granjero;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class Pularda implements Ponedor, Runnable {
 
     @Override
     public boolean condicionDeFinalizacion() {
-        return false;
+        return granjero.isDespierto();
     }
 
     @Override

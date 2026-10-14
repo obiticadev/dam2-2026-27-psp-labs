@@ -2,6 +2,7 @@ package Clases.Animales;
 
 import java.time.Duration;
 
+import Clases.Granjero;
 import Clases.Huevera;
 import Clases.Huevo;
 import Interfaces.Ponedor;
@@ -10,9 +11,10 @@ public class Gallina implements Ponedor, Runnable {
     private final int PESO_MIN = 25;
     private final int PESO_MAX = 75;
     private final Duration ESPERA_ENTRE_HUEVOS = Duration.ofSeconds(1);
+    private final Granjero granjero;
 
-    public Gallina() {
-
+    public Gallina(Granjero granjero) {
+        this.granjero = granjero;
     }
 
     @Override
@@ -43,22 +45,23 @@ public class Gallina implements Ponedor, Runnable {
 
     @Override
     public boolean condicionDeFinalizacion() {
-        return false;
+        return granjero.isDespierto();
     }
 
     @Override
     public void run() {
-        boolean continuar = true;
-        while (continuar) {
-            try {
-                poner(crearHuevo());
-                if (condicionDeFinalizacion()) {
-                    continuar = false;
+        try {
+            while (!condicionDeFinalizacion()) {
+                boolean puesto = Huevera.agregarHuevo(crearHuevo())
+                if (!puesto) {
+                    return;
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.sleep(ESPERA_ENTRE_HUEVOS);
             }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
+        boolean continuar = true;
     }
 
 }
