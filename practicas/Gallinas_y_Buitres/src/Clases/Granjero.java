@@ -39,6 +39,7 @@ public class Granjero implements Runnable {
     public void run() {
         despertar();
         System.out.println("¡SALID DE MI GRANJA ANIMALES!");
+        Huevera.cerrar();
     }
 
 }

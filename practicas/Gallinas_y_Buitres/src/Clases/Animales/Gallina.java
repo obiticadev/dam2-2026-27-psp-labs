@@ -52,8 +52,7 @@ public class Gallina implements Ponedor, Runnable {
     public void run() {
         try {
             while (!condicionDeFinalizacion()) {
-                boolean puesto = Huevera.agregarHuevo(crearHuevo())
-                if (!puesto) {
+                if (!Huevera.agregarHuevo(crearHuevo())) {
                     return;
                 }
                 Thread.sleep(ESPERA_ENTRE_HUEVOS);
@@ -61,7 +60,6 @@ public class Gallina implements Ponedor, Runnable {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        boolean continuar = true;
     }
 
 }

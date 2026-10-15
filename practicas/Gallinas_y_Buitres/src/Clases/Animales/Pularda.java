@@ -50,16 +50,16 @@ public class Pularda implements Ponedor, Runnable {
 
     @Override
     public void run() {
-        boolean continuar = true;
-        while (continuar) {
-            try {
-                poner(crearHuevo());
-                if (condicionDeFinalizacion()) {
-                    continuar = false;
+        try {
+            while (!condicionDeFinalizacion()) {
+                if (!Huevera.agregarHuevo(crearHuevo())) {
+                    return;
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.sleep(ESPERA_ENTRE_HUEVOS);
             }
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 

@@ -60,13 +60,4 @@ public class Huevera {
         }
     }
 
-    private static int getSizePila() {
-        lock.lock();
-        try {
-            return pila.size();
-        } finally {
-            lock.unlock();
-        }
-    }
-
 }
