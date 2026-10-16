@@ -8,17 +8,16 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Huevera {
     private final static int MAX_CAPACIDAD = 12;
     private static Deque<Huevo> pila = new ArrayDeque<>(MAX_CAPACIDAD);
-    private static ReentrantLock lock = new ReentrantLock();
-    private static Condition hayHueco = lock.newCondition();
-    private static Condition hayHuevo = lock.newCondition();
+    private static ReentrantLock lockHuevera = new ReentrantLock();
+    private static Condition hayHueco = lockHuevera.newCondition();
+    private static Condition hayHuevo = lockHuevera.newCondition();
     private static boolean cerrada = false;
 
     public Huevera() {
-
     }
 
     public static boolean agregarHuevo(Huevo huevo) throws InterruptedException {
-        lock.lock();
+        lockHuevera.lock();
         try {
             while (pila.size() == MAX_CAPACIDAD && !cerrada) {
                 hayHueco.await();
@@ -30,33 +29,33 @@ public class Huevera {
             hayHuevo.signal();
             return true;
         } finally {
-            lock.unlock();
+            lockHuevera.unlock();
         }
     }
 
     public static Huevo retirarHuevo() throws InterruptedException {
         Huevo huevo = null;
-        lock.lock();
+        lockHuevera.lock();
         try {
-            while (pila.size() == 0) {
+            while (pila.size() == 0 && !cerrada) {
                 hayHuevo.await();
             }
             huevo = pila.pop();
             hayHueco.signal();
         } finally {
-            lock.unlock();
+            lockHuevera.unlock();
         }
         return huevo;
     }
 
     public static void cerrar() {
-        lock.lock();
+        lockHuevera.lock();
         try {
             cerrada = true;
             hayHueco.signalAll();
             hayHuevo.signalAll();
         } finally {
-            lock.unlock();
+            lockHuevera.unlock();
         }
     }
 

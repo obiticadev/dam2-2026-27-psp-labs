@@ -11,10 +11,8 @@ public class Pularda implements Ponedor, Runnable {
     private final int PESO_MIN = 80;
     private final int PESO_MAX = 120;
     private final Duration ESPERA_ENTRE_HUEVOS = Duration.ofSeconds(2);
-    private final Granjero granjero;
 
-    public Pularda(Granjero granjero) {
-        this.granjero = granjero;
+    public Pularda() {
     }
 
     @Override
@@ -45,19 +43,15 @@ public class Pularda implements Ponedor, Runnable {
 
     @Override
     public boolean condicionDeFinalizacion() {
-        return granjero.isDespierto();
+        return Granjero.isDespierto();
     }
 
     @Override
     public void run() {
         try {
-            while (!condicionDeFinalizacion()) {
-                if (!Huevera.agregarHuevo(crearHuevo())) {
-                    return;
-                }
-                Thread.sleep(ESPERA_ENTRE_HUEVOS);
+            while (!condicionDeFinalizacion() && Huevera.agregarHuevo(crearHuevo())) {
+                Thread.sleep(getEspera());
             }
-
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }

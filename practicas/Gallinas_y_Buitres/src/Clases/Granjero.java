@@ -4,34 +4,33 @@ import java.time.Duration;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Granjero implements Runnable {
-    private final static ReentrantLock granjeroLock = new ReentrantLock();
-    private boolean despierto;
+    public final static ReentrantLock lockGranjero = new ReentrantLock();
+    private static boolean despierto = false;
     private final Duration duracion = Duration.ofSeconds(7);
 
     public Granjero() {
-        this.despierto = false;
     }
 
     private void despertar() {
         try {
             Thread.sleep(duracion);
-            granjeroLock.lock();
+            lockGranjero.lock();
             try {
-                this.despierto = true;
+                Granjero.despierto = true;
             } finally {
-                granjeroLock.unlock();
+                lockGranjero.unlock();
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public boolean isDespierto() {
-        granjeroLock.lock();
+    public static boolean isDespierto() {
+        lockGranjero.lock();
         try {
-            return this.despierto;
+            return despierto;
         } finally {
-            granjeroLock.unlock();
+            lockGranjero.unlock();
         }
     }
 

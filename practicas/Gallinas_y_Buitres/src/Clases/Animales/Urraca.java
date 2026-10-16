@@ -3,21 +3,28 @@ package Clases.Animales;
 import java.time.Duration;
 
 import Clases.Granjero;
+import Clases.Huevera;
 import Clases.Huevo;
 import Interfaces.Extractor;
 
 public class Urraca implements Extractor, Runnable {
     private final Duration ESPERA_ENTRE_HUEVOS = Duration.ofSeconds(1);
-    private final Granjero granjero;
+    private boolean huevoRetirado = false;
 
-    public Urraca(Granjero granjero) {
-        this.granjero = granjero;
+    public Urraca() {
     }
 
     @Override
     public Huevo extraer() throws InterruptedException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'extraer'");
+        Huevo huevo = Huevera.retirarHuevo();
+        this.huevoRetirado = true;
+        return huevo;
+    }
+
+    private String eco(Huevo huevo) throws InterruptedException {
+        return String.format(
+                "Me he comido un huevo de %s con %d gramos, ME VOY",
+                huevo.getNombrePadre(), huevo.getPeso());
     }
 
     @Override
@@ -27,14 +34,25 @@ public class Urraca implements Extractor, Runnable {
 
     @Override
     public boolean condicionDeFinalizacion() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'condicionDeFinalizacion'");
+        boolean salida;
+        if (Granjero.isDespierto() || huevoRetirado) {
+            salida = true;
+        } else {
+            salida = false;
+        }
+        return salida;
     }
 
     @Override
     public void run() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'run'");
+        try {
+            while (!condicionDeFinalizacion()) {
+                System.out.println(eco(extraer()));
+                Thread.sleep(getEspera());
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
 }

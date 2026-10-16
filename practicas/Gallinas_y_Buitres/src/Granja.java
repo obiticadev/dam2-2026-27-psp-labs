@@ -16,25 +16,25 @@ public class Granja {
         hiloGranjero.start();
 
         for (int i = 0; i < PULARDAS; i++) {
-            Pularda pularda = new Pularda(granjero);
+            Pularda pularda = new Pularda();
             Thread hilo = new Thread(pularda);
             hilo.start();
         }
 
         for (int i = 0; i < GALLINAS; i++) {
-            Gallina gallina = new Gallina(granjero);
+            Gallina gallina = new Gallina();
             Thread hilo = new Thread(gallina);
             hilo.start();
         }
 
         for (int i = 0; i < BUITRES; i++) {
-            Buitre buitre = new Buitre(granjero);
+            Buitre buitre = new Buitre();
             Thread hilo = new Thread(buitre);
             hilo.start();
         }
 
         for (int i = 0; i < URRACAS; i++) {
-            Urraca urraca = new Urraca(granjero);
+            Urraca urraca = new Urraca();
             Thread hilo = new Thread(urraca);
             hilo.start();
         }
