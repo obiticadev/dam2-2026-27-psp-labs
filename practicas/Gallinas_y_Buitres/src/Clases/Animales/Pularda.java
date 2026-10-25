@@ -49,9 +49,13 @@ public class Pularda implements Ponedor, Runnable {
     @Override
     public void run() {
         try {
+            Granjero.lockGranjero.lock();
             while (!condicionDeFinalizacion() && Huevera.agregarHuevo(crearHuevo())) {
+                Granjero.lockGranjero.unlock();
                 Thread.sleep(getEspera());
+                Granjero.lockGranjero.lock();
             }
+            Granjero.lockGranjero.unlock();
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }

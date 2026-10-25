@@ -68,21 +68,15 @@ public class Buitre implements Extractor, Runnable {
 
     @Override
     public boolean condicionDeFinalizacion() {
-        boolean salida;
-        if (Granjero.isDespierto() || estomagoActual > CAPACIDAD_ESTOMAGO) {
-            salida = true;
-        } else {
-            salida = false;
-        }
-        return salida;
-
+        return Granjero.isDespierto() || estomagoActual > CAPACIDAD_ESTOMAGO;
     }
 
     @Override
     public void run() {
         try {
-
+            Granjero.lockGranjero.lock();
             while (!condicionDeFinalizacion()) {
+                Granjero.lockGranjero.unlock();
                 Huevo huevo = comer(extraer());
                 if (huevo != null) {
                     if (estomagoActual <= CAPACIDAD_ESTOMAGO) {
@@ -93,7 +87,9 @@ public class Buitre implements Extractor, Runnable {
                     }
                 }
                 Thread.sleep(getEspera());
+                Granjero.lockGranjero.lock();
             }
+            Granjero.lockGranjero.unlock();
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }

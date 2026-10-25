@@ -34,22 +34,20 @@ public class Urraca implements Extractor, Runnable {
 
     @Override
     public boolean condicionDeFinalizacion() {
-        boolean salida;
-        if (Granjero.isDespierto() || huevoRetirado) {
-            salida = true;
-        } else {
-            salida = false;
-        }
-        return salida;
+        return Granjero.isDespierto() || huevoRetirado;
     }
 
     @Override
     public void run() {
         try {
+            Granjero.lockGranjero.lock();
             while (!condicionDeFinalizacion()) {
+                Granjero.lockGranjero.unlock();
                 System.out.println(eco(extraer()));
                 Thread.sleep(getEspera());
+                Granjero.lockGranjero.lock();
             }
+            Granjero.lockGranjero.unlock();
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }

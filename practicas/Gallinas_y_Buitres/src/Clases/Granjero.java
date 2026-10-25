@@ -26,12 +26,7 @@ public class Granjero implements Runnable {
     }
 
     public static boolean isDespierto() {
-        lockGranjero.lock();
-        try {
-            return despierto;
-        } finally {
-            lockGranjero.unlock();
-        }
+        return despierto;
     }
 
     @Override
