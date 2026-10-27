@@ -26,29 +26,36 @@ public class Huevera {
     }
 
     public void meterHuevo(Huevo h) {
+        boolean continuar = true;
         try {
-            s.acquire(1);
-            granjero.s.acquire(1);
-
-            while (huevera.size() >= CANTIDAD_MAX && granjero.esDormido) {
-                s.release(1);
-                granjero.s.release(1);
-
-                // Esperar
-                Thread.sleep(100);
-
+            while (continuar) {
                 s.acquire(1);
                 granjero.s.acquire(1);
-            }
 
-            s.acquire(GallinasBuitre202526.MAX_PETICIONES - 1);
+                while (huevera.size() >= CANTIDAD_MAX && granjero.esDormido) {
+                    s.release(1);
+                    granjero.s.release(1);
 
-            if (granjero.esDormido) {
-                granjero.s.release(1);
-                huevera.push(h);
-                System.out.println("He metido el huevo " + h.toString());
+                    // Esperar
+                    Thread.sleep(100);
+
+                    s.acquire(1);
+                    granjero.s.acquire(1);
+                }
+                if (granjero.esDormido) {
+                    if (s.tryAcquire(GallinasBuitre202526.MAX_PETICIONES - 1)) {
+                        huevera.push(h);
+                        s.release(GallinasBuitre202526.MAX_PETICIONES - 1);
+                        System.out.println("He metido el huevo " + h.toString());
+                        continuar = false;
+                    }
+                    granjero.s.release(1);
+                } else {
+                    continuar = false;
+                    granjero.s.release(1);
+                }
+                s.release(1);
             }
-            s.release(GallinasBuitre202526.MAX_PETICIONES);
         } catch (InterruptedException ex) {
             Logger.getLogger(Huevera.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -57,26 +64,34 @@ public class Huevera {
 
     public Huevo sacarHuevo() {
         Huevo huevo = null;
+        boolean continuar = true;
         try {
-            s.acquire(1);
-            granjero.s.acquire(1);
-            while (huevera.empty() && granjero.esDormido) {
-                s.release(1);
-                granjero.s.release(1);
-                // Esperar
-                Thread.sleep(100);
+            while (continuar) {
                 s.acquire(1);
                 granjero.s.acquire(1);
-            }
+                while (huevera.empty() && granjero.esDormido) {
+                    s.release(1);
+                    granjero.s.release(1);
+                    // Esperar
+                    Thread.sleep(100);
+                    s.acquire(1);
+                    granjero.s.acquire(1);
+                }
 
-            s.acquire(GallinasBuitre202526.MAX_PETICIONES - 1);
-
-            if (granjero.esDormido) {
-                huevo = huevera.pop();
-                System.out.println("He sacado el huevo " + huevo.toString());
+                if (granjero.esDormido) {
+                    if (s.tryAcquire(GallinasBuitre202526.MAX_PETICIONES - 1)) {
+                        huevo = huevera.pop();
+                        s.release(GallinasBuitre202526.MAX_PETICIONES - 1);
+                        System.out.println("He sacado el huevo " + huevo.toString());
+                        continuar = false;
+                    }
+                    granjero.s.release(1);
+                } else {
+                    continuar = false;
+                    granjero.s.release(1);
+                }
+                s.release(1);
             }
-            s.release(GallinasBuitre202526.MAX_PETICIONES);
-            granjero.s.release(1);
         } catch (InterruptedException ex) {
             Logger.getLogger(Huevera.class.getName()).log(Level.SEVERE, null, ex);
         }

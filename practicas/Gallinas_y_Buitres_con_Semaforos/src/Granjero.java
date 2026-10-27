@@ -15,9 +15,10 @@ public class Granjero extends Thread {
 
     boolean esDormido = true;
     Semaphore s;
+    final int MAX_PETICIONES_GRANJERO = 6;
 
     public Granjero() {
-        this.s = new Semaphore(6);
+        this.s = new Semaphore(MAX_PETICIONES_GRANJERO);
     }
 
     @Override
@@ -33,6 +34,10 @@ public class Granjero extends Thread {
             Logger.getLogger(Granjero.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public int getMAX_PETICIONES_GRANJERO() {
+        return MAX_PETICIONES_GRANJERO;
     }
 
 }

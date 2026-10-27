@@ -24,10 +24,14 @@ public class Buitre extends Thread {
     @Override
     public void run() {
 
-        granjero.lock.lock();
+        try {
+            granjero.s.acquire(1);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Granjero.class.getName()).log(Level.SEVERE, null, ex);
+        }
         while (granjero.esDormido && cantidad < 200) {
 
-            granjero.lock.unlock();
+            granjero.s.release(1);
 
             Huevo h = huevera.sacarHuevo();
             try {
@@ -39,10 +43,10 @@ public class Buitre extends Thread {
             } catch (InterruptedException ex) {
                 Logger.getLogger(Gallina.class.getName()).log(Level.SEVERE, null, ex);
             }
-            granjero.lock.lock();
+            granjero.s.acquire(1);
 
         }
-        granjero.lock.unlock();
+        granjero.s.release(1);
 
         System.out.println(
                 "Soy buitre y me largo me comi los huevos de: " + cadena + "con un peso total comido " + cantidad);
