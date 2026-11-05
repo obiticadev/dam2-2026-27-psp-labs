@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 
 import java.util.Stack;
 import java.util.concurrent.Semaphore;
@@ -27,8 +23,8 @@ public class Huevera {
 
     public void meterHuevo(Huevo h) {
         boolean continuar = true;
-        try {
-            while (continuar) {
+        while (continuar) {
+            try {
                 s.acquire(1);
                 granjero.s.acquire(1);
 
@@ -49,15 +45,14 @@ public class Huevera {
                         System.out.println("He metido el huevo " + h.toString());
                         continuar = false;
                     }
-                    granjero.s.release(1);
                 } else {
                     continuar = false;
-                    granjero.s.release(1);
                 }
                 s.release(1);
+                granjero.s.release(1);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Huevera.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Huevera.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -65,8 +60,8 @@ public class Huevera {
     public Huevo sacarHuevo() {
         Huevo huevo = null;
         boolean continuar = true;
-        try {
-            while (continuar) {
+        while (continuar) {
+            try {
                 s.acquire(1);
                 granjero.s.acquire(1);
                 while (huevera.empty() && granjero.esDormido) {
@@ -77,7 +72,6 @@ public class Huevera {
                     s.acquire(1);
                     granjero.s.acquire(1);
                 }
-
                 if (granjero.esDormido) {
                     if (s.tryAcquire(GallinasBuitre202526.MAX_PETICIONES - 1)) {
                         huevo = huevera.pop();
@@ -85,15 +79,14 @@ public class Huevera {
                         System.out.println("He sacado el huevo " + huevo.toString());
                         continuar = false;
                     }
-                    granjero.s.release(1);
                 } else {
                     continuar = false;
-                    granjero.s.release(1);
                 }
                 s.release(1);
+                granjero.s.release(1);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Huevera.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Huevera.class.getName()).log(Level.SEVERE, null, ex);
         }
         return huevo;
 

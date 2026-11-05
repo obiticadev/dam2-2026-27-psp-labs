@@ -37,10 +37,14 @@ public class Gallina extends Thread {
     @Override
     public void run() {
 
-        granjero.lock.lock();
+        try {
+            granjero.s.acquire(1);
+        } catch (InterruptedException e) {
+            Logger.getLogger(Gallina.class.getName()).log(Level.SEVERE, null, e);
+        }
         while (granjero.esDormido) {
 
-            granjero.lock.unlock();
+            granjero.s.release(1);
             int peso = (int) ((Math.random() * 50) + 25);
             Huevo h = new Huevo(peso, nombre);
             huevera.meterHuevo(h);
@@ -49,10 +53,14 @@ public class Gallina extends Thread {
             } catch (InterruptedException ex) {
                 Logger.getLogger(Gallina.class.getName()).log(Level.SEVERE, null, ex);
             }
-            granjero.lock.lock();
+            try {
+                granjero.s.acquire(1);
+            } catch (InterruptedException e) {
+                Logger.getLogger(Gallina.class.getName()).log(Level.SEVERE, null, e);
+            }
 
         }
-        granjero.lock.unlock();
+        granjero.s.release(1);
 
     }
 

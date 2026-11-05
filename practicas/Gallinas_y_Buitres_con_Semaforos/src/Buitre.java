@@ -26,30 +26,35 @@ public class Buitre extends Thread {
 
         try {
             granjero.s.acquire(1);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Granjero.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException e) {
+            Logger.getLogger(Granjero.class.getName()).log(Level.SEVERE, null, e);
         }
         while (granjero.esDormido && cantidad < 200) {
 
             granjero.s.release(1);
 
             Huevo h = huevera.sacarHuevo();
-            try {
-                cantidad += h.getPeso();
-                cadena += "-" + h.getNombreGallina();
-                System.out
-                        .println("Soy Buitre y me he comido este huevo " + h.toString() + "Llevo comidos " + cantidad);
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Gallina.class.getName()).log(Level.SEVERE, null, ex);
+            if (h != null) {
+                try {
+                    cantidad += h.getPeso();
+                    cadena += "-" + h.getNombreGallina();
+                    System.out.println(
+                            "Soy buitre y me largo me comi los huevos de: " + cadena + "con un peso total comido "
+                                    + cantidad);
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Gallina.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-            granjero.s.acquire(1);
+            try {
+                granjero.s.acquire(1);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                Logger.getLogger(Granjero.class.getName()).log(Level.SEVERE, null, e);
+            }
 
         }
         granjero.s.release(1);
-
-        System.out.println(
-                "Soy buitre y me largo me comi los huevos de: " + cadena + "con un peso total comido " + cantidad);
 
     }
 

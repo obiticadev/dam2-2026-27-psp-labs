@@ -24,21 +24,31 @@ public class Hurraca extends Thread {
     public void run() {
         Huevo h = null;
 
-        granjero.lock.lock();
+        try {
+            granjero.s.acquire(1);
+        } catch (InterruptedException e) {
+            Logger.getLogger(Gallina.class.getName()).log(Level.SEVERE, null, e);
+        }
 
         while (granjero.esDormido && h == null) {
-            granjero.lock.unlock();
+            granjero.s.release(1);
             h = huevera.sacarHuevo();
-            try {
-                System.out.println("Soy Hurraca y me he comido este huevo " + h.toString());
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Gallina.class.getName()).log(Level.SEVERE, null, ex);
+            if (h != null) {
+                try {
+                    System.out.println("Soy Hurraca y me he comido este huevo " + h.toString());
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Gallina.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-            granjero.lock.lock();
+            try {
+                granjero.s.acquire(1);
+            } catch (InterruptedException e) {
+                Logger.getLogger(Gallina.class.getName()).log(Level.SEVERE, null, e);
+            }
 
         }
-        granjero.lock.unlock();
+        granjero.s.release(1);
 
     }
 

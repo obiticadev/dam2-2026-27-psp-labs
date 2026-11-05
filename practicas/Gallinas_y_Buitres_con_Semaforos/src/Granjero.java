@@ -15,7 +15,7 @@ public class Granjero extends Thread {
 
     boolean esDormido = true;
     Semaphore s;
-    final int MAX_PETICIONES_GRANJERO = 6;
+    final int MAX_PETICIONES_GRANJERO = 20;
 
     public Granjero() {
         this.s = new Semaphore(MAX_PETICIONES_GRANJERO);
@@ -26,10 +26,10 @@ public class Granjero extends Thread {
 
         try {
             Thread.sleep(7000);
-            s.acquire(6);
+            s.acquire(MAX_PETICIONES_GRANJERO);
             System.err.println("SOY EL GRANJERO TODO EL MUNDO FUERA");
             esDormido = false;
-            s.release(6);
+            s.release(MAX_PETICIONES_GRANJERO);
         } catch (InterruptedException ex) {
             Logger.getLogger(Granjero.class.getName()).log(Level.SEVERE, null, ex);
         }
