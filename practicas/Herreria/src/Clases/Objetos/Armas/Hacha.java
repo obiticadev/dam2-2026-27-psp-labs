@@ -4,13 +4,13 @@ import ClasesAbstractas.Arma;
 
 public class Hacha extends Arma {
 
-    public Hacha(String nombre, String valor) {
-        super(nombre, valor);
+    public Hacha() {
+        super(Hacha.class.getName(), 5);
     }
 
     @Override
     public String toString() {
-        return "Hacha [valor=" + valor + "]";
+        return "Hacha [valor=" + VALOR + "]";
     }
 
 }

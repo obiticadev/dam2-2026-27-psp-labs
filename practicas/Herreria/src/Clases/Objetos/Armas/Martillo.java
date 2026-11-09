@@ -4,14 +4,13 @@ import ClasesAbstractas.Arma;
 
 public class Martillo extends Arma {
 
-    public Martillo(String nombre, String valor) {
-        super(nombre, valor);
-        // TODO Auto-generated constructor stub
+    public Martillo() {
+        super(Martillo.class.getName(), 7);
     }
 
     @Override
     public String toString() {
-        return "Martillo [valor=" + valor + "]";
+        return "Martillo [valor=" + VALOR + "]";
     }
 
 }
