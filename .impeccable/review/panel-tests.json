@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-12T22:07:33.800Z",
+  "routes": "44 por viewport",
+  "viewports": [
+    1440,
+    390
+  ],
+  "errors": [],
+  "missing": [],
+  "checks": [
+    "9 escenas completas con salida en el padre",
+    "escenario con error",
+    "ejercicios extra persistentes",
+    "selector Windows/Linux",
+    "examen: inicio, concentración, entrega, nota e historial",
+    "persistencia de respuesta",
+    "modelo desplegable",
+    "progreso",
+    "búsqueda y estado vacío",
+    "reloj y cierre de intento",
+    "transición bloqueado a listo",
+    "enlaces locales existentes"
+  ]
+}

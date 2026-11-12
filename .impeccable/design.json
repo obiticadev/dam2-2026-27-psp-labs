@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-12T20:32:00Z",
+  "title": "Design System: Autoestudio PSP",
+  "extensions": {
+    "colorMeta": {
+      "ink": {"role":"primary","displayName":"Tinta azul","tonalRamp":["oklch(15% .02 230)","oklch(27% .04 230)","oklch(39% .06 230)","oklch(51% .07 230)","oklch(63% .07 230)","oklch(75% .05 230)","oklch(86% .03 230)","oklch(95% .01 230)"]},
+      "ink-deep": {"role":"primary","displayName":"Tinta profunda","tonalRamp":["oklch(15% .02 230)","oklch(27% .04 230)","oklch(39% .06 230)","oklch(51% .07 230)","oklch(63% .07 230)","oklch(75% .05 230)","oklch(86% .03 230)","oklch(95% .01 230)"]},
+      "accent": {"role":"primary","displayName":"Azafrán","tonalRamp":["oklch(15% .02 88)","oklch(27% .05 88)","oklch(39% .08 88)","oklch(51% .10 88)","oklch(63% .13 88)","oklch(75% .14 88)","oklch(86% .09 88)","oklch(95% .03 88)"]},
+      "accent-light": {"role":"primary","displayName":"Papel azafrán","tonalRamp":["oklch(15% .01 88)","oklch(27% .02 88)","oklch(39% .03 88)","oklch(51% .04 88)","oklch(63% .04 88)","oklch(75% .04 88)","oklch(86% .03 88)","oklch(95% .01 88)"]},
+      "blue": {"role":"secondary","displayName":"Azul enlace","tonalRamp":["oklch(15% .02 250)","oklch(27% .05 250)","oklch(39% .09 250)","oklch(51% .12 250)","oklch(63% .12 250)","oklch(75% .08 250)","oklch(86% .04 250)","oklch(95% .01 250)"]},
+      "green": {"role":"secondary","displayName":"Verde comprobación","tonalRamp":["oklch(15% .02 158)","oklch(27% .04 158)","oklch(39% .07 158)","oklch(51% .09 158)","oklch(63% .09 158)","oklch(75% .06 158)","oklch(86% .03 158)","oklch(95% .01 158)"]},
+      "red": {"role":"secondary","displayName":"Rojo reservado; variable sin consumo actual","tonalRamp":["oklch(15% .02 25)","oklch(27% .05 25)","oklch(39% .10 25)","oklch(51% .14 25)","oklch(63% .14 25)","oklch(75% .09 25)","oklch(86% .04 25)","oklch(95% .01 25)"]},
+      "muted": {"role":"neutral","displayName":"Texto auxiliar","tonalRamp":["oklch(15% .01 230)","oklch(27% .02 230)","oklch(39% .03 230)","oklch(51% .03 230)","oklch(63% .03 230)","oklch(75% .02 230)","oklch(86% .01 230)","oklch(95% .005 230)"]},
+      "paper": {"role":"neutral","displayName":"Papel","tonalRamp":["oklch(15% 0 0)","oklch(27% 0 0)","oklch(39% 0 0)","oklch(51% 0 0)","oklch(63% 0 0)","oklch(75% 0 0)","oklch(86% 0 0)","oklch(95% 0 0)"]},
+      "ground": {"role":"neutral","displayName":"Suelo frío","tonalRamp":["oklch(15% .002 220)","oklch(27% .004 220)","oklch(39% .006 220)","oklch(51% .008 220)","oklch(63% .008 220)","oklch(75% .006 220)","oklch(86% .004 220)","oklch(95% .002 220)"]},
+      "line": {"role":"neutral","displayName":"Divisor","tonalRamp":["oklch(15% .003 225)","oklch(27% .006 225)","oklch(39% .012 225)","oklch(51% .016 225)","oklch(63% .016 225)","oklch(75% .012 225)","oklch(86% .008 225)","oklch(95% .003 225)"]},
+      "code": {"role":"neutral","displayName":"Pizarra de código","tonalRamp":["oklch(15% .02 230)","oklch(27% .04 230)","oklch(39% .06 230)","oklch(51% .07 230)","oklch(63% .07 230)","oklch(75% .05 230)","oklch(86% .03 230)","oklch(95% .01 230)"]},
+      "neutral-hover": {"role":"neutral","displayName":"Gris interactivo","tonalRamp":["oklch(15% .003 230)","oklch(27% .006 230)","oklch(39% .012 230)","oklch(51% .016 230)","oklch(63% .016 230)","oklch(75% .012 230)","oklch(86% .008 230)","oklch(95% .003 230)"]},
+      "field": {"role":"neutral","displayName":"Campo","tonalRamp":["oklch(15% .001 248)","oklch(27% .002 248)","oklch(39% .003 248)","oklch(51% .004 248)","oklch(63% .004 248)","oklch(75% .003 248)","oklch(86% .002 248)","oklch(95% .001 248)"]}
+    },
+    "typographyMeta": {
+      "display":{"displayName":"Título","purpose":"Manrope local; jerarquía principal."},
+      "body":{"displayName":"Lectura","purpose":"Texto corrido, máximo 72ch."},
+      "mono":{"displayName":"Código","purpose":"Código, rutas, numeración técnica y reloj."}
+    },
+    "shadows": [
+      {"name":"shadow","value":"0 12px 32px -20px #102b3940","purpose":"Escena y toast."},
+      {"name":"mobile-sidebar","value":"10px 10px 35px -20px #102b3970","purpose":"Menú móvil superpuesto."}
+    ],
+    "motion": [
+      {"name":"ease","value":"cubic-bezier(.16,1,.3,1)","purpose":"Curva compartida."},
+      {"name":"actor","value":"transform .6s var(--ease), background .6s var(--ease), border-color .6s var(--ease)","purpose":"Cambio de actor activo."},
+      {"name":"signal","value":"left .85s var(--ease), transform .85s var(--ease)","purpose":"Propagación entre actores."},
+      {"name":"code-line","value":"background .4s var(--ease), color .4s var(--ease)","purpose":"Código sincronizado."},
+      {"name":"sidebar","value":"transform .3s var(--ease)","purpose":"Apertura móvil."},
+      {"name":"reduced-motion","value":"@media(prefers-reduced-motion:reduce)","purpose":"Sin animaciones ni transiciones; señal oculta y actor sin transformación."}
+    ],
+    "breakpoints": [
+      {"name":"mobile-max","value":"700px"},
+      {"name":"stack-max","value":"1000px"},
+      {"name":"compact-max","value":"1200px"},
+      {"name":"wide-min","value":"1600px"}
+    ]
+  },
+  "components": [
+    {
+      "name":"Primary Button","kind":"button","refersTo":"button-primary",
+      "description":"Acción principal; foco global y estado deshabilitado conservados.",
+      "html":"<button class=\"ds-primary\">Reproducir</button>",
+      "css":".ds-primary{font:600 .85rem/1.5 var(--sans,'Segoe UI',Arial,sans-serif);display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:11px 16px;border:1px solid var(--ink,#183d50);border-radius:5px;background:var(--ink,#183d50);color:var(--paper,#fff);cursor:pointer}.ds-primary:hover{background:var(--ink-deep,#102b39)}.ds-primary:focus-visible{outline:3px solid var(--blue,#2765a0);outline-offset:4px}.ds-primary:disabled{cursor:not-allowed;opacity:.42}"
+    },
+    {
+      "name":"Secondary Button","kind":"button","refersTo":"button-secondary",
+      "description":"Acción secundaria plana.",
+      "html":"<button class=\"ds-secondary\">Ver patrón</button>",
+      "css":".ds-secondary{font:600 .85rem/1.5 var(--sans,'Segoe UI',Arial,sans-serif);padding:11px 16px;border:1px solid var(--line,#d6e0e4);border-radius:5px;background:var(--paper,#fff);color:var(--ink,#183d50);cursor:pointer}.ds-secondary:hover{background:#e8eef1}.ds-secondary:focus-visible{outline:3px solid var(--blue,#2765a0);outline-offset:4px}.ds-secondary:disabled{cursor:not-allowed;opacity:.42}"
+    },
+    {
+      "name":"Accent Button","kind":"button","refersTo":"button-accent",
+      "description":"Variante azafrán; hover oscuro heredado documentado sin corregir UI.",
+      "html":"<button class=\"ds-accent\">Empezar</button>",
+      "css":".ds-accent{font:600 .85rem/1.5 var(--sans,'Segoe UI',Arial,sans-serif);padding:11px 16px;border:1px solid var(--accent,#f4c85a);border-radius:5px;background:var(--accent,#f4c85a);color:var(--ink-deep,#102b39);cursor:pointer}.ds-accent:hover{background:var(--accent-light,#fff6db);border-color:var(--accent,#f4c85a);color:var(--ink-deep,#102b39)}.ds-accent:focus-visible{outline:3px solid var(--blue,#2765a0);outline-offset:4px}.ds-accent:disabled{cursor:not-allowed;opacity:.42}"
+    },
+    {
+      "name":"Answer Field","kind":"input","refersTo":"answer-field",
+      "description":"Respuesta libre con etiqueta y resize vertical.",
+      "html":"<label class=\"ds-label\" for=\"ds-answer\">Tu respuesta</label><textarea id=\"ds-answer\" class=\"ds-answer\" placeholder=\"Explica el mecanismo\"></textarea>",
+      "css":".ds-label{display:block;margin:0 0 10px;font:600 .88rem var(--sans,'Segoe UI',Arial,sans-serif);color:var(--ink,#183d50)}.ds-answer{box-sizing:border-box;width:100%;min-height:175px;resize:vertical;border:1px solid #9cafb9;border-radius:5px;background:#fcfdfe;padding:16px;color:var(--ink,#183d50);font:.96rem/1.8 var(--sans,'Segoe UI',Arial,sans-serif);caret-color:var(--blue,#2765a0)}.ds-answer::placeholder{color:#627681}.ds-answer:focus-visible{outline:3px solid var(--blue,#2765a0);outline-offset:4px}"
+    },
+    {
+      "name":"Sidebar Navigation","kind":"nav","refersTo":"navigation-active",
+      "description":"Selección azafrán sobre navegación tinta.",
+      "html":"<nav class=\"ds-nav\" aria-label=\"Talleres\"><a class=\"ds-link ds-active\" href=\"#taller\" aria-current=\"page\">01 · Procesos</a><a class=\"ds-link\" href=\"#teoria\">Teoría</a></nav>",
+      "css":".ds-nav{background:var(--ink,#183d50);padding:18px;font-family:var(--sans,'Segoe UI',Arial,sans-serif)}.ds-link{display:flex;gap:11px;padding:10px 12px;color:#e2ecf0;text-decoration:none;font-size:.88rem;border-radius:5px;line-height:1.45;margin:3px 0}.ds-link:hover{background:#245064;color:#fff}.ds-link.ds-active{background:var(--accent,#f4c85a);color:var(--ink-deep,#102b39);font-weight:650}.ds-link:focus-visible{outline:3px solid var(--blue,#2765a0);outline-offset:4px}"
+    },
+    {
+      "name":"Article Container","kind":"card","refersTo":"article",
+      "description":"Contenedor de lectura sin elevación ni estados interactivos.",
+      "html":"<article class=\"ds-article\"><h3 class=\"ds-title\">El proceso hijo</h3><p class=\"ds-body\">Un proceso tiene su propio espacio de memoria.</p></article>",
+      "css":".ds-article{background:var(--paper,#fff);color:var(--ink,#183d50);border:1px solid var(--line,#d6e0e4);border-radius:var(--radius,10px);padding:32px}.ds-title{font:700 1.12rem/1.2 var(--display,Manrope,'Segoe UI',Arial,sans-serif);letter-spacing:-.015em;margin:0 0 10px}.ds-body{font:.96rem/1.65 var(--sans,'Segoe UI',Arial,sans-serif);max-width:72ch;margin:0 0 16px}"
+    },
+    {
+      "name":"Command Tokens","kind":"chip","refersTo":"command-token",
+      "description":"Fragmentos explicativos estáticos, no botones.",
+      "html":"<div class=\"ds-tokens\"><span class=\"ds-token\">java</span><span class=\"ds-token\">Hijo</span></div>",
+      "css":".ds-tokens{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.ds-token{font:.8rem var(--mono,Consolas,'Liberation Mono',monospace);padding:8px 10px;background:var(--paper,#fff);color:var(--ink,#183d50);border:1px solid var(--line,#d6e0e4);border-radius:4px;overflow-wrap:anywhere;max-width:100%}.ds-token:first-child{background:var(--ink,#183d50);color:white;border-color:var(--ink,#183d50)}"
+    }
+  ],
+  "narrative": {
+    "northStar":"Atlas secuencial",
+    "overview":"Metáfora y descripciones cualitativas: elección de implementación, no nueva declaración de marca del usuario. El sistema combina tinta azul, papel frío y azafrán con diagramas etiquetados. La jerarquía tipográfica distingue explicación, acción y código sin ornamentación ajena al aprendizaje.\n\nExtracción del sistema construido en `autoestudio/UT01-procesos/panel/styles.css`; los tokens anteriores son normativos. El alcance observado es el panel local, no las prácticas Java ni otros proyectos.",
+    "keyCharacteristics":["Lectura amplia con controles compactos.","Tinta estructural y azafrán para selección y actividad.","Movimiento causal, detenible y compatible con movimiento reducido."],
+    "rules":[],
+    "dos":["**Do** reutilizar los tokens de tinta, papel y azafrán según su función.","**Do** mantener foco visible y etiquetas textuales junto al estado visual.","**Do** respetar el orden de lectura al apilar columnas."],
+    "donts":["**Don't** convertir los artículos planos en tarjetas elevadas.","**Don't** usar movimiento decorativo para representar progreso técnico.","**Don't** tratar una simulación visual como ejecución comprobada."]
+  }
+}
