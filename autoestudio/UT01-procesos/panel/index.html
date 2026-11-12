@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#183d50">
+  <meta name="description" content="Autoestudio de PSP: procesos Java, comandos CMD y teoría breve con escenas interactivas.">
+  <title>PSP · Atlas de procesos</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="data.js"></script>
+  <script defer src="escenas.js"></script>
+  <script defer src="ejercicios.js"></script>
+  <script defer src="scenes.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="app-shell">
+    <aside class="sidebar" id="navigation" aria-label="Navegación de estudio">
+      <a class="brand" href="#inicio" aria-label="PSP, inicio">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 10h13v8H4zm19 12h13v8H23zM17 14h12v8M10 18v8h13"/></svg>
+        <span>PSP<span class="brand-sub">Atlas de procesos</span></span>
+      </a>
+      <p class="sidebar-note">Tu examen, en Windows.<br>Tu práctica, con criterio.</p>
+      <nav id="nav-main"></nav>
+      <div class="sidebar-bottom">
+        <div class="progress-label"><span>Talleres autoevaluados</span><span id="progress-count">0 / 9</span></div>
+        <progress id="progress" max="9" value="0" aria-label="Talleres marcados como dominados"></progress>
+        <a href="#guia">Abrir en VS Code y empezar</a>
+        <small>UT01 · Java 17+ · CMD<br>Sin cuentas. Sin conexión obligatoria.</small>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <button id="menu-toggle" class="icon-button menu-toggle" aria-expanded="false" aria-controls="navigation" aria-label="Abrir navegación"></button>
+        <div class="breadcrumbs" id="breadcrumbs">Autoestudio / UT01</div>
+        <div class="topbar-end"><div class="segmented platform" role="group" aria-label="Sistema donde practicas"><button data-platform="win" aria-pressed="true">Windows · CMD</button><button data-platform="linux" aria-pressed="false">Linux · ensayo</button></div><a href="#comandos" class="quick-link">Consultar comandos</a></div>
+      </header>
+      <main id="contenido" tabindex="-1"></main>
+      <footer class="footer"><span>Entender el patrón. Poder repetirlo.</span><a href="#fuentes">Fuentes, alcance y verificación</a></footer>
+    </div>
+  </div>
+  <div id="toast" role="status" class="toast" hidden></div>
+  <noscript>Este panel necesita JavaScript para sus escenas y ejercicios interactivos. Los talleres Java y las instrucciones README están disponibles en la carpeta del proyecto.</noscript>
+</body>
+</html>

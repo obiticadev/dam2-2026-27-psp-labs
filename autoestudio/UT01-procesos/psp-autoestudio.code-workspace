@@ -1,0 +1,10 @@
+{
+  "folders": [{"path": "."}],
+  "settings": {
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "java.configuration.runtimes": [],
+    "files.exclude": {"**/bin": true, "**/target": true},
+    "java.import.exclusions": ["**/soluciones/**", "**/herramientas/**"]
+  },
+  "extensions": {"recommendations": ["vscjava.vscode-java-pack"]}
+}
