@@ -1,0 +1,7 @@
+{
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.project.sourcePaths": [
+        "talleres/01-ping/src",
+        "talleres/02-directorios/src"
+    ]
+}

@@ -1,8 +1,4 @@
-package estudio.t01;
-
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -15,7 +11,7 @@ public class Hijo {
         // TODO: arranca UNA vez; fusiona stderr, lee hasta null y espera.
         // TODO: propaga el codigo de salida; detente si falla una etapa.
         String destino = args.length > 0 ? args[0] : "localhost";
-        ProcessBuilder pb = new ProcessBuilder("ping", "-c", "2", destino);
+        ProcessBuilder pb = new ProcessBuilder("ping", "-n", "2", destino);
         Process proceso = pb.start();
         BufferedReader br = new BufferedReader(new InputStreamReader(proceso.getInputStream()));
         String linea;
