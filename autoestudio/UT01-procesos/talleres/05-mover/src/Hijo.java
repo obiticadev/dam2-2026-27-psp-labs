@@ -13,17 +13,18 @@ public class Hijo {
         // TODO: arranca UNA vez; fusiona stderr, lee hasta null y espera.
         // TODO: propaga el codigo de salida; detente si falla una etapa.
         String origen = "original.txt";
-        String destino = args.length > 0 ? args[0] : "renombrado.txt";
+        String destino = args.length > 0 ? args[0] : "src\\original.txt";
 
-        ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "move", origen, destino);
+        ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "move", "/y", origen, destino);
+        pb.redirectErrorStream(true);
         Process process = pb.start();
+
         try (BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 System.out.println(linea);
             }
-        } catch (Exception e) {
-            // TODO: handle exception
+            System.out.println("Código de error hijo: " + process.waitFor());
         }
     }
 }
