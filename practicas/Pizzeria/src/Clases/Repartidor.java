@@ -4,23 +4,36 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Random;
 
+import Clases.Enum.Ingrediente;
+
 public class Repartidor {
     private final int MAX_CAPACIDAD = 500;
-    private int ingredientesEnCamion;
     private Ingrediente[] variedadDeIngrediente;
     private Deque<Ingrediente> listaDelCamion = new ArrayDeque<>(500);
 
     public Repartidor() {
-        this.ingredientesEnCamion = 0;
         variedadDeIngrediente = Ingrediente.values();
     }
 
-    public void cargarRefrigerador() {
+    public void cargarCamion() {
         Random random = new Random();
         Ingrediente ingrediente;
         for (int i = 0; i < MAX_CAPACIDAD; i++) {
-            ingrediente = random.nextInt(variedadDeIngrediente.length);
+            ingrediente = variedadDeIngrediente[random.nextInt(variedadDeIngrediente.length)];
+            listaDelCamion.push(ingrediente);
         }
+    }
+
+    public void repartirEn(Refrigerador refrigerador) {
+        Ingrediente ingrediente;
+        while ((ingrediente = listaDelCamion.peekFirst()) != null) {
+            refrigerador.guardarIngrediente(ingrediente);
+            listaDelCamion.removeFirst();
+        }
+    }
+
+    public Deque<Ingrediente> getListaDelCamion() {
+        return listaDelCamion;
     }
 
 }
